@@ -1,17 +1,18 @@
 import "./App.css";
-import createStore from "./store/createStore";
+import createStore, { useStore } from "./store/createStore";
+
+const store = createStore({ count: 0 });
+
 function App() {
-  const store = createStore({ count: 0 });
-  const { setState, getState } = store;
+  const state = useStore(store);
 
   const add = () => {
-    setState({ count: getState().count + 1 });
-    console.log(getState());
+    store.setState({ count: state.count + 1 });
   };
 
   return (
     <div>
-      {getState().count}
+      {state.count}
       <button onClick={add}>++</button>
     </div>
   );
